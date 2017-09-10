@@ -18,7 +18,7 @@ struct Configuration {
     port: String,
 }
 
-
+//read connection configuration from config.xml and set it in 'Configuration' struct
 fn read_configuration() -> Configuration 
 {
     use quick_xml::reader::Reader;
@@ -38,7 +38,6 @@ fn read_configuration() -> Configuration
     loop {
         match reader.read_event(&mut buf) {
             Ok(Event::Start(ref e)) if e.name() == b"bind_address" => {
-//                    let ss = reader.read_text(b"bind_address").expect("Cannot decode text value");
                 bind_address.push(
                     reader
                         .read_text(b"bind_address", &mut Vec::new())
@@ -70,6 +69,5 @@ fn main() {
 	let config :Configuration;
     config = read_configuration();
 	let listening_address = format!("{}:{}", config.address, config.port);
-//	iso8583_parser::read_iso_xml();
 	server::start_listening(listening_address);
 }

@@ -4,9 +4,7 @@ use std::net::TcpStream;
 use std::fs::File;
 use std::str::FromStr;
 use serde_xml_rs;
-//use serialize::hex::FromHex;
 use std::i32;
-//use serde_xml_rs::from_str;
 
 #[derive(Clone,Deserialize, Debug)]
 pub struct iso_transactions {
@@ -29,7 +27,6 @@ pub struct field {
     num: String,
     format: String,
     length: String,
-//	#[serde(rename="$value")]
     value: String,
 }
 
@@ -50,11 +47,12 @@ pub fn read_iso_xml()
     }   
 }
 
+
 fn is_set(bitmap: String,field: i32) ->bool
 {
 	let mut  i =(field-1)/8;
 	i = i*2;
-	let mut j = (field-1)%8;
+	let j = (field-1)%8;
 	let part: String = bitmap.chars().skip(i as usize).take(2).collect();  
 	let s = i32::from_str_radix(&part, 16).unwrap();
 	let mut a:i32 = 128;
@@ -87,6 +85,7 @@ fn extract_field(index:i32,message: String,field_record: field)-> (String,usize)
    let mut i:usize = index as usize;
    match field_record.format.as_str()
    {
+//data format LLVAR and LLLVAR means variable length
      "LLVAR" =>{
 	        let temp: String= message.chars().skip(i).take(2).collect();
 			len = FromStr::from_str(&temp).unwrap();
@@ -129,8 +128,8 @@ fn parse_incoming_to_umf(input_message: String ,message_format: &transaction  )
 		index = index + 16;
 
 	}
+	//check if each field is present
 	for x in 1..64 {
-//			println!("check field {} ..", x); 
 	    if is_set(bitmap.to_string(),x){
 		        
 			   let f = get_field_format(x,message_format.clone());
@@ -157,7 +156,7 @@ fn parse_incoming_to_umf(input_message: String ,message_format: &transaction  )
 
 pub fn parse_request(str_buffer: String)->transaction
 {
-	let mut ret_val:transaction;
+	let  ret_val:transaction;
     println!("Request: {}", str_buffer);
 	let mti = str_buffer[..4].to_owned();
     println!("mtri: {}", mti);
@@ -193,7 +192,7 @@ fn set_bit(bitmap: String,field: i32)->String
 {
 	let mut  i =(field-1)/8;
 	i = i*2;
-	let mut j = (field-1)%8;
+	let j = (field-1)%8;
 	println!("i={} , j={}",i,j);
 	let mut part: String = bitmap.chars().skip(i as usize).take(2).collect();  
 	let mut s = i32::from_str_radix(&part, 16).unwrap();
@@ -220,6 +219,8 @@ fn set_bit(bitmap: String,field: i32)->String
 
 fn generate_transaction(message_format: &transaction  )-> String
 {
+    //bitmap is initially all zero
+	//bitmap format is hex string
     let mut bitmap:String = "0000000000000000".to_string();
     let mut body:String = String::new();
     let mut gen_str:String = String::new();
@@ -229,7 +230,7 @@ fn generate_transaction(message_format: &transaction  )-> String
 	{
 	   if f.value.is_empty() == false {
 		println!("set field = {}",f.num);
-		let mut n = FromStr::from_str(&f.num).unwrap();
+		let  n = FromStr::from_str(&f.num).unwrap();
 		
 		bitmap = set_bit(bitmap,n);
 		let mut slen:String = String::new();
@@ -273,13 +274,8 @@ pub fn generate_response(request_message: &transaction) ->String
 			println!("found mti {}", iso_transaction.mti);
 			s = generate_transaction(&iso_transaction);
 			return s;
-//		    parse_incoming_to_umf(str_buffer.to_string(),&iso_transaction);
-//		    ret_val = iso_transaction.clone();
-//			return ret_val;
 		}
     }
-
-
    s
 }
 

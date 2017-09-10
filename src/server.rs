@@ -1,13 +1,8 @@
-//extern crate Iso8583;
-//use Iso8583::ThreadPool;
-
 use std::io::prelude::*;
 use std::net::TcpListener;
 use std::net::TcpStream;
-use std::fs::File;
-use std::thread;
 use std::time::Duration;
-
+ 
 use iso8583_parser;
 
 pub fn start_listening(	address: String) {
@@ -23,6 +18,7 @@ pub fn start_listening(	address: String) {
 
 }
 
+//parse the request and send the response 
 fn handle_connection(mut stream: TcpStream) {
 
     let mut buffer = [0; 1024*10];
