@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iso_transactions version="87">
+<transaction mti="0200">
+    <field num="1" format="BINARY" length="8" value="" />
+    <field num="2" format="LLVAR" length="19" value="" />
+    <field num="3" format="NUMERIC" length="6"  value="" />
+    <field num="4" format="AMOUNT" length="12" value="" />
+    <field num="7" format="DATE10" length="10" value="" />
+    <field num="11" format="NUMERIC" length="6" value="" />
+    <field num="12" format="TIME" length="6" value="" />
+    <field num="13" format="DATE6" length="6" value="" />
+    <field num="15" format="DATE4" length="4" value="" />
+    <field num="17" format="DATE6" length="6" value="" />
+    <field num="32" format="LLVAR" length="99" value="" />
+    <field num="35" format="LLVAR" length="40" value="" />
+    <field num="37" format="NUMERIC" length="12" value="" />
+    <field num="38" format="NUMERIC" length="6" value="" />
+    <field num="39" format="NUMERIC" length="2" value="" />
+    <field num="41" format="ALPHA" length="16" value="" />
+    <field num="43" format="ALPHA" length="40" value="" />
+    <field num="48" format="LLLVAR" length="999" value="" />
+    <field num="49" format="ALPHA" length="3" value="" />
+    <field num="60" format="LLLVAR" length="999" value="" />
+    <field num="61" format="LLLVAR" length="999" value="" />
+    <field num="70" format="ALPHA" length="3" value="" />
+    <field num="100" format="LLVAR" length="999" value="" />
+    <field num="102" format="LLVAR" length="999" value="" />
+    <field num="126" format="LLLVAR" length="999" value="" />
+</transaction>
+<transaction mti="0210">
+    <field num="1" format="BINARY" length="8" value="" />
+    <field num="2" format="LLVAR" length="19" value="" />
+    <field num="3" format="NUMERIC" length="6" value="" />
+    <field num="4" format="AMOUNT" length="12" value="0000000000010000" />
+    <field num="7" format="DATE10" length="10" value="" />
+    <field num="11" format="NUMERIC" length="6" value="123456" />
+    <field num="12" format="TIME" length="6" value="121230" />
+    <field num="13" format="DATE6" length="6" value="170910" />
+    <field num="15" format="DATE4" length="4" value="" />
+    <field num="17" format="DATE4" length="4" value="" />
+    <field num="32" format="LLVAR" length="99" value="" />
+    <field num="35" format="LLVAR" length="40" value="" />
+    <field num="37" format="NUMERIC" length="12" value="123456789012" />
+    <field num="38" format="NUMERIC" length="6" value="111111" />
+    <field num="39" format="NUMERIC" length="2" value="00" />
+    <field num="41" format="ALPHA" length="16" value="" />
+    <field num="43" format="ALPHA" length="40" value="" />
+    <field num="48" format="LLLVAR" length="999" value="" />
+    <field num="49" format="ALPHA" length="3" value="" />
+    <field num="60" format="LLLVAR" length="999" value="" />
+    <field num="61" format="LLLVAR" length="999" value="" />
+    <field num="70" format="ALPHA" length="3" value="" />
+    <field num="100" format="LLVAR" length="999" value="" />
+    <field num="102" format="LLVAR" length="999" value="" />
+    <field num="126" format="LLLVAR" length="999" value="" />
+</transaction>
+</iso_transactions>

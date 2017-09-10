@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+<bind_address>127.0.0.1</bind_address>
+<port>2020</port>
+</configuration>
