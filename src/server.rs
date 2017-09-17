@@ -1,3 +1,4 @@
+use std::thread;
 use std::io::prelude::*;
 use std::net::TcpListener;
 use std::net::TcpStream;
@@ -12,8 +13,10 @@ pub fn start_listening(	address: String) {
 
     for stream in listener.incoming() {
         let stream = stream.unwrap();
-
-        handle_connection(stream);
+		thread::spawn(|| {
+            handle_connection(stream);
+        });
+//        handle_connection(stream);
     }
 
 }
@@ -26,8 +29,10 @@ fn handle_connection(mut stream: TcpStream) {
     stream.read(&mut buffer).unwrap();
 
     let mut str_buffer =  String::from_utf8_lossy(&buffer[..]);
+	println!("request transaction: {}",str_buffer.trim());
 	let mut req: iso8583_parser::transaction=   iso8583_parser::parse_request(str_buffer.to_string());
    let mut response:String = iso8583_parser::generate_response(&req);
+	println!("response transaction: {}",response);
 
     stream.write(response.as_bytes()).unwrap();
     stream.flush().unwrap();   
